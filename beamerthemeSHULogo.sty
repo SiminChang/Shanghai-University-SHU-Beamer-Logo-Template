@@ -1,0 +1,115 @@
+% Shanghai University logo theme, adapted by Simin Chang.
+% Layout reference: QiyuanChen, ZJU-Beamer-Template (CC BY 4.0).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeSHULogo}[2026/11/17 Shanghai University logo theme]
+\RequirePackage{tikz}
+\RequirePackage{tcolorbox}
+
+\mode<presentation>
+\useoutertheme{split}
+\usecolortheme{whale}
+\useinnertheme[shadow=false]{rounded}
+\usecolortheme{orchid}
+
+\definecolor{SHUBlue}{cmyk}{1,.70,.20,.20}
+\definecolor{SHUDark}{cmyk}{1,.70,.20,.55}
+\definecolor{SHUPanel}{RGB}{222,232,239}
+\setbeamercolor{structure}{fg=SHUBlue}
+\setbeamercolor{title}{fg=white,bg=SHUBlue}
+\setbeamercolor{subtitle}{fg=white}
+\setbeamercolor{frametitle}{fg=white,bg=SHUBlue}
+\setbeamercolor{framesubtitle}{fg=white}
+\setbeamercolor{block title}{fg=white,bg=SHUBlue}
+\setbeamercolor{block body}{fg=black,bg=SHUPanel}
+\setbeamercolor{block title alerted}{fg=white,bg=SHUDark}
+\setbeamercolor{block body alerted}{fg=black,bg=SHUPanel}
+\setbeamercolor{block title example}{fg=white,bg=SHUBlue!85!teal}
+\setbeamercolor{block body example}{fg=black,bg=SHUPanel}
+\setbeamercolor{author in head/foot}{fg=white,bg=SHUDark}
+\setbeamercolor{date in head/foot}{fg=white,bg=SHUDark}
+\setbeamercolor{title in head/foot}{fg=white,bg=SHUBlue}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\small,series=\mdseries}
+\setbeamersize{text margin left=.85cm,text margin right=.85cm}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{navigation symbols}{}
+
+% The artwork is already pale. Clip the oversized mark at the page boundary.
+\setbeamertemplate{background}{%
+  \begin{tikzpicture}
+    \clip (0,0) rectangle (\paperwidth,\paperheight);
+    \node[inner sep=0pt] at (.94\paperwidth,.49\paperheight)
+      {\includegraphics[height=.82\paperheight]{pic/shu-watermark.pdf}};
+    \path[use as bounding box] (0,0) rectangle (\paperwidth,\paperheight);
+  \end{tikzpicture}}
+
+% The same lockup appears on the title slide and in the frame title strip.
+\newcommand{\SHU@lockup}{\includegraphics[height=.45cm]{pic/shu-lockup-white.pdf}}
+\addtobeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[SHUBlue] (current page.north west)
+       rectangle ([yshift=-.55cm]current page.north east);
+    \node[anchor=east,inner sep=0pt] at
+      ([xshift=-.22cm,yshift=-.275cm]current page.north east) {\SHU@lockup};
+  \end{tikzpicture}\par
+}{}
+
+% Fixed mark size, natural title height: long titles and subtitles wrap on the left.
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth]{frametitle}
+    \vskip.05cm%
+    \hbox to \paperwidth{%
+      \hskip.30cm%
+      \begin{minipage}[c]{\dimexpr\paperwidth-2.18cm\relax}
+        \raggedright\usebeamerfont{frametitle}\insertframetitle\par
+        \ifx\insertframesubtitle\@empty\else
+          {\usebeamerfont{framesubtitle}\insertframesubtitle\par}%
+        \fi
+      \end{minipage}%
+      \hfil\begin{minipage}[c]{1.44cm}\SHU@lockup\end{minipage}\hskip.22cm%
+    }%
+    \vskip.05cm%
+  \end{beamercolorbox}%
+}
+
+% Only the rounded body fill is translucent. No solid frame is painted behind it.
+\newcommand{\SHUblockopacity}{0.70}
+\newcommand{\SHU@blockbegin}[1]{%
+  \usebeamercolor{block title#1}\colorlet{SHU@blocktitle}{bg}%
+  \colorlet{SHU@blocktitletext}{fg}%
+  \usebeamercolor{block body#1}\colorlet{SHU@blockbody}{bg}%
+  \colorlet{SHU@blocktext}{fg}%
+  \begin{tcolorbox}[
+    title={\insertblocktitle},fonttitle=\usebeamerfont{block title#1},
+    fontupper=\usebeamerfont{block body#1},
+    colbacktitle=SHU@blocktitle,coltitle=SHU@blocktitletext,
+    colback=SHU@blockbody,colupper=SHU@blocktext,
+    opacityframe=0,opacityback=\SHUblockopacity,opacitybacktitle=1,
+    boxrule=0pt,titlerule=0pt,arc=3pt,outer arc=3pt,
+    boxsep=0pt,left=4pt,right=4pt,top=2.4pt,bottom=2.4pt,
+    toptitle=1.4pt,bottomtitle=1.4pt,before skip=5pt,after skip=3pt]}
+\setbeamertemplate{block begin}{\SHU@blockbegin{}}
+\setbeamertemplate{block end}{\end{tcolorbox}}
+\setbeamertemplate{block alerted begin}{\SHU@blockbegin{ alerted}}
+\setbeamertemplate{block alerted end}{\end{tcolorbox}}
+\setbeamertemplate{block example begin}{\SHU@blockbegin{ example}}
+\setbeamertemplate{block example end}{\end{tcolorbox}}
+
+% Original four footer fields, with a thinner single line.
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.1ex,dp=.88ex,center]{author in head/foot}%
+      \usebeamerfont{author in head/foot}\insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.1ex,dp=.88ex,center]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\insertshortdate
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.43\paperwidth,ht=2.1ex,dp=.88ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.07\paperwidth,ht=2.1ex,dp=.88ex,right,rightskip=.17cm]{title in head/foot}%
+      \insertframenumber\,/\,\inserttotalframenumber
+    \end{beamercolorbox}}%
+  \vskip0pt}
+\mode<all>

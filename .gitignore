@@ -1,0 +1,17 @@
+# LaTeX build output. The typeset sample PDF is versioned.
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.xdv
+*.synctex.gz
+
+# Local Gallery submission materials
+/Overleaf-Gallery/
