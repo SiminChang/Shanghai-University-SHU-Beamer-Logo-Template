@@ -99,6 +99,13 @@
 % Original four footer fields, with a thinner single line.
 \setbeamertemplate{footline}{%
   \leavevmode\hbox{%
+    % Extend the two footer colours beyond the crop edge at fractional zooms.
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[SHUBlue] ([xshift=-2bp,yshift=-2bp]current page.south west)
+        rectangle ([xshift=2bp,yshift=2bp]current page.south east);
+      \fill[SHUDark] ([xshift=-2bp,yshift=-2bp]current page.south west)
+        rectangle ([yshift=2bp]current page.south);
+    \end{tikzpicture}%
     \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.1ex,dp=.88ex,center]{author in head/foot}%
       \usebeamerfont{author in head/foot}\insertshortauthor
     \end{beamercolorbox}%

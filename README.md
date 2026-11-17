@@ -29,4 +29,4 @@ latexmk -xelatex SHU_BeamerTemplate.tex
 
 ## 来源与许可
 
-Simin Chang 根据 QiyuanChen 的浙江大学 Beamer 模板制作此上海大学版本，更换了学校标识和封面信息，重做标题栏及半透明内容框。模板及改编示例沿用 CC BY 4.0。学校名称、校徽和校名字标归上海大学所有。[原版 Overleaf 工程](https://www.overleaf.com/latex/templates/zhe-jiang-da-xue-beamer-mo-ban-zju-beamer-template/jhtfvynrcbrg) · [许可与署名](LICENSE) · [上海大学官网](https://www.shu.edu.cn/)
+模板及改编示例沿用 CC BY 4.0。学校名称、校徽和校名字标归上海大学所有。[原版 Overleaf 工程](https://www.overleaf.com/latex/templates/zhe-jiang-da-xue-beamer-mo-ban-zju-beamer-template/jhtfvynrcbrg) · [许可与署名](LICENSE) · [上海大学官网](https://www.shu.edu.cn/)
